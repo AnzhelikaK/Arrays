@@ -1,13 +1,16 @@
 package com.company;
 
+import javax.crypto.NullCipher;
+import java.util.ArrayList;
+
 public class Reverse {
     // 1.1 Reverse the array of numbers vise-versa
-    public static int[] reverseArray(int[] array) {
+    public static int[] reverse(int[] array) {
         if (array == null) {                                        // All time CHECK on null
             System.out.println("Received empty array");
-            return new int[]{};                                             // first option
+            return null;                                             // first option
             // return throw new NullPointerException("You sent null");  // second option
-            // return null;                                     // third option
+            // return new int []{};                                     // third option
         } else {
             int[] arrayTemporary = new int[array.length];
             for (int i = 0; i < array.length; i++) arrayTemporary[i] = array[array.length - i - 1];
@@ -16,19 +19,17 @@ public class Reverse {
     }
 
     // 1.2 Reverse the array of numbers vise-versa: the way 2 - reverse without an additional array
-    public static int[] reverseArray2(int[] array) {
+    public static int[] reverse2(int[] array) {
         if (array != null) {
-            int x;
+            int x = 0;
             for (int i = 0; i < array.length / 2; i++) {
                 x = array[i];
                 array[i] = array[array.length - 1 - i];
                 array[array.length - 1 - i] = x;
             }
             return array;
-        } else {
-            System.out.println("Received empty array");
-            return new int[]{};
-        }
+        } else return new int[]{};      //  pay attention (how write else + return - IN ONE LINE
+
     }
 
     // 2.1 flip the line-String vice-versa
@@ -48,16 +49,18 @@ public class Reverse {
         if (str != null) {
         int l = str.length();
         char[] arrayOfStr = new char[l];
-        for (int i = l - 1; i >= 0; i--) {
-            arrayOfStr[l - i - 1] = str.charAt(i);
-        }
+
+            for (int i = l - 1; i >= 0; i--) {
+                arrayOfStr[l - i - 1] = str.charAt(i);
+            }
+
         return String.valueOf(arrayOfStr);
         // return new String(arrayOfStr);
         } else return null;
     }
 
     // 3.1 Sort the array of numbers without Arrays.sort(array). Selection sort (RU: Сортировка выбором)
-    public static int[] selectionSort(int[] array) {
+    public static int[] sort(int[] array) {
         for (int i = 0; i < array.length - 1; i++) {
             int min = array[i];
             int iMin = i;
@@ -76,8 +79,8 @@ public class Reverse {
     }
 
     // 3.2 Sort the array of numbers without Arrays.sort(array). Bubble sort (RU: Сортировка Пузырьком)
-    public static int[] bubbleSort(int[] array) {
-        int temp;
+    public static int[] sort2(int[] array) {
+        int temp = 0;
         for (int i = array.length - 1; i > 0; i--) {
             for (int j = 0; j < i; j++) {
                 if (array[j] > array[j + 1]) {
@@ -91,18 +94,21 @@ public class Reverse {
     }
 
     // 4. Reverse each word in the line save the order of words
-    public static String reversePhrase(String phrase) {
-        String delimiter = " ";
+    public static String reverse(String phrase) {
+        String delimitr = " ";
         String[] arrayOfPhrase;
         StringBuilder phraseBuilt = new StringBuilder();
-        arrayOfPhrase = phrase.split(delimiter);
-        for (String s : arrayOfPhrase) {
-            StringBuilder temp = new StringBuilder(s);
-            phraseBuilt.append(temp.reverse().toString()).append(delimiter);
+        arrayOfPhrase = phrase.split(delimitr);
+        for (int i = 0; i < arrayOfPhrase.length; i++) {
+            if (!arrayOfPhrase[i].equals(delimitr)) {
+                StringBuilder temp = new StringBuilder(arrayOfPhrase[i]);
+                phraseBuilt.append(temp.reverse().toString()).append(" ");
+            }
         }
         //  return phraseBuilt.toString().trim(); // to cut " " at the end, but then cut also " "  at the beginning
         // or
-        return phraseBuilt.deleteCharAt(phraseBuilt.length() - 1).toString();
+        String a = phraseBuilt.toString();
+        return a.substring(0, a.length() - 1);
     }
 }
 
